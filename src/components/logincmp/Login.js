@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import './Login.css'
 import bk from './images/background.svg'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class Login extends React.Component {
     constructor() {
@@ -10,7 +10,7 @@ class Login extends React.Component {
       this.state = {
         username: '',
         password: '',
-        isAuthorized: false,
+        isAuthorized: false
       };
     }
     onChange = (e) => {
@@ -20,6 +20,7 @@ class Login extends React.Component {
       e.preventDefault();
       const { username, password } = this.state;
       const token = Buffer.from(`${username}:${password}`, 'utf8').toString('base64');
+      const tokenuser = React.createContext(token);
       axios.post('http://api.math.silaeder.ru/users/login', {} ,{
                   headers: {
                       "Access-Control-Allow-Origin": "*",
@@ -31,12 +32,17 @@ class Login extends React.Component {
           console.log(res);
           this.setState({ username, password, isAuthorized:true });
       });
+      let data = [{token:tokenuser._currentValue}]
+      if (this.state.isAuthorized === true) {
+        this.props.history.push({
+          pathname: '/chats',
+          state: data
+        })
+        console.log(data);
+      }
     }
     render() {
       const { username, password } = this.state;
-      if (this.state.isAuthorized === true) {
-        return <Redirect to='/'/>
-      }
       return (
         <div className="login">
           <img src={ bk } className="bk_img"/>
@@ -58,5 +64,4 @@ class Login extends React.Component {
       );
     }
 }
-
 export default Login;

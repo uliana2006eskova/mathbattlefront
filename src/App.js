@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Route path='/' component={Course} exact/>
+          <Route path='/chats' component={Course} exact/>
           <Route path='/login' component={Login} exact/>
           <Route path='/signup' component={Register} exact/>
         </div>
