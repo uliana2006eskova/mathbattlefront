@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import './Login.css'
 import bk from './images/background.svg'
+import { Redirect } from 'react-router-dom'
 
 class Login extends React.Component {
     constructor() {
@@ -9,6 +10,7 @@ class Login extends React.Component {
       this.state = {
         username: '',
         password: '',
+        isAuthorized: false,
       };
     }
     onChange = (e) => {
@@ -27,14 +29,17 @@ class Login extends React.Component {
       })
       .then((res) => {
           console.log(res);
-          this.setState({ username, password });
+          this.setState({ username, password, isAuthorized:true });
       });
     }
     render() {
       const { username, password } = this.state;
+      if (this.state.isAuthorized === true) {
+        return <Redirect to='/'/>
+      }
       return (
         <div className="login">
-          <img src={bk} className="bk_img"/>
+          <img src={ bk } className="bk_img"/>
           <div className="field">
             <p className="field__label">MathBattle</p>
             <p className="field__enter_p">Вход</p>
@@ -45,7 +50,7 @@ class Login extends React.Component {
               <div className="form__password">
                   <input className="form__password_p" placeholder="Пароль" name="password" onChange={this.onChange}/>
               </div>
-              <a href="/signup" classname="register_p">Нет аккаунта? Создайте!</a>
+              <a href="/signup" classname="register_p">Нет аккаунта? <u>Создайте!</u></a>
               <button onClick={this.onSubmit} className="form_submit form_submit_p">Вход</button>
             </form>
           </div>
