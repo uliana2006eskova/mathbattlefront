@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import './Login.css'
 import bk from './images/background.svg'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class Login extends React.Component {
     constructor() {
@@ -10,7 +10,8 @@ class Login extends React.Component {
       this.state = {
         username: '',
         password: '',
-        isAuthorized: false
+        isAuthorized: false,
+        token: ''
       };
     }
     onChange = (e) => {
@@ -19,31 +20,29 @@ class Login extends React.Component {
     onSubmit = (e) => {
       e.preventDefault();
       const { username, password } = this.state;
-      const token = Buffer.from(`${username}:${password}`, 'utf8').toString('base64');
-      const tokenuser = React.createContext(token);
+      const tokenuser = Buffer.from(`${username}:${password}`, 'utf8').toString('base64');
       axios.post('http://api.math.silaeder.ru/users/login', {} ,{
                   headers: {
                       "Access-Control-Allow-Origin": "*",
                       "Content-Type": "application/x-www-form-urlencoded",
-                      'Authorization': `Basic ${token}`
+                      'Authorization': `Basic ${tokenuser}`
                   }
       })
       .then((res) => {
           console.log(res);
-          this.setState({ username, password, isAuthorized:true });
+          this.setState({ username, password, isAuthorized:true, token:tokenuser });
       });
-      let data = [{token:tokenuser._currentValue}]
-      if (this.state.isAuthorized === true) {
-        this.props.history.push({
-          pathname: '/chats',
-          state: data
-        })
-        console.log(data);
-      }
     }
     render() {
-      const { username, password } = this.state;
-      return (
+      const { username, password, token } = this.state;
+      if (this.state.isAuthorized == true) {
+         return <Redirect to={{
+          pathname: '/chats',
+          state: {
+            token: {token}
+          }
+        }}/>
+      } return (
         <div className="login">
           <img src={ bk } className="bk_img"/>
           <div className="field">
