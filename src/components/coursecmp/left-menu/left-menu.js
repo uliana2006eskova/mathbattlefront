@@ -13,22 +13,22 @@ class ServerIcon extends React.Component {
     return x;
   }
   colToHex(c) {
-    
+
     // Hack so colors are bright enough
     let color = (c < 75) ? c + 75 : c
     let hex = color.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
   }
-  
+
   // uses colToHex to concatenate
   // a full 6 digit hex code
   rgbToHex(r,g,b) {
     return "#" + this.colToHex(r) + this.colToHex(g) + this.colToHex(b);
   }
-  
+
   // Returns three random 0-255 integers
   fungetRandomColor(text) {
-    
+
     return this.rgbToHex(
       Math.floor(Math.abs(this.random(this.hash(text))) * 255),
       Math.floor(Math.abs(this.random(this.hash(text + "1303"))) * 255),
@@ -36,7 +36,7 @@ class ServerIcon extends React.Component {
   }
 
   hash(s){
-    return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
+    return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
   }
 
   render() {
@@ -64,6 +64,7 @@ class LeftMenu extends React.Component {
 
 
   componentDidMount() {
+    console.log(this.props.tokenuser);
     axios.get(`http://api.math.silaeder.ru/courses`,{
       headers: {"Access-Control-Allow-Origin": "*",
       "Content-Type": "application/x-www-form-urlencoded",
@@ -77,7 +78,7 @@ class LeftMenu extends React.Component {
   }
 
   render() {
-    
+
     return (
       <div>
          <div className="left-menu">
