@@ -6,7 +6,10 @@
         <SignUp v-if="stage === 2" :view.sync="stage"></SignUp>
         <div id="main" v-if="stage === 3">
             <SideBar :view.sync="stage"></SideBar>
+            <Header></Header>
+            <ChatSelect></ChatSelect>
         </div>
+
     </div>
 </template>
 
@@ -14,6 +17,8 @@
     import Login from "./components/Login";
     import SignUp from "./components/Signup";
     import SideBar from "./components/SideBar";
+    import Header from "./components/Header";
+    import ChatSelect from "./components/ChatSelect";
 
     export default {
         name: 'App',
@@ -40,6 +45,8 @@
             SideBar,
             SignUp,
             Login,
+            Header,
+            ChatSelect,
         }
     }
 </script>
@@ -76,7 +83,7 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
-    h1, h2, h3, h5, h6 {
+    p, h1, h2, h3, h5, h6 {
         margin: 0;
         font-weight: normal;
     }
