@@ -10,9 +10,17 @@
 
 
             <div class="con-form">
-                <vs-input v-model="login" placeholder="Логин" label-placeholder="Логин">
+                <vs-input v-model="email" placeholder="Email" label-placeholder="Email"
+                            v-on:focus="emailFocus=true"
+                            v-on:blur="emailFocus=false">
                     <template #icon>
                         <i class="bx bx-user"></i>
+                    </template>
+                    <template v-if="validEmail && emailFocus" #message-success>
+                        Email валиден
+                    </template>
+                    <template v-if="!validEmail && email !== '' && emailFocus" #message-danger>
+                        Email не валиден
                     </template>
                 </vs-input>
                 <vs-input
@@ -62,12 +70,13 @@
     export default {
         data: () => ({
             active: true,
-            login: '',
+            email: '',
             password: '',
             name: '',
             hasVisiblePassword: false,
             remember: true,
             nameFocus: false,
+            emailFocus: false,
         }),
         computed: {
             getProgress() {
@@ -108,10 +117,19 @@
             validName() {
                 return /^[а-яА-ЯёЁ]{2,30} [а-яА-ЯёЁ]{2,30}$/.test(this.name)
             },
+            validEmail() {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(this.email).toLowerCase());
+            },
         },
         methods: {
-            checkEmail() {
+            checkName() {
                 return /^[а-яА-ЯёЁ]{2,30} [а-яА-ЯёЁ]{2,30}$/.test(this.name)
+            },
+
+            checkEmail() {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(this.email).toLowerCase());
             },
 
             checkPassword() {
@@ -159,17 +177,20 @@
                 })
             },
             sendSignUp() {
-                if (!this.checkEmail()) {
-                    this.openDangerNotification("top-left", "Не подходящее имя", "Введенное Вами имя не валидное. Имя должно состоять из двух слов написанных латиницей", "danger")
-                }
                 if (this.checkPassword() < 80) {
                     this.openDangerNotification("top-left", "Не подходящий пароль", "Введеный Вами пароль слишком слабый", "danger")
                 }
+                if (!this.checkName()) {
+                    this.openDangerNotification("top-left", "Не подходящее имя", "Введенное Вами имя не валидное. Имя должно состоять из двух слов написанных латиницей", "danger")
+                }
+                if (this.checkEmail()) {
+                    this.openDangerNotification("top-left", "Не подходящая почта", "Введеная Вами почта не валидна", "danger")
+                }
 
-                this.axios.post("http://176.99.173.63:8080/users/signup", this.qs.stringify({
+                this.axios.post("http://api.math.silaeder.ru/users/signup", this.qs.stringify({
                     name: this.name.split(' ')[0],
                     surname: this.name.split(' ')[1],
-                    username: this.login,
+                    username: this.email,
                     password: this.password,
                 }), {}).then((response) => {
                     if (response.status === 200) {
