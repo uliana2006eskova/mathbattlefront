@@ -26,8 +26,10 @@
             stage: 0,
         }),
         mounted() {
+            console.log(process.env.VUE_APP_BACKEND)
+            console.log(process.env.NODE_ENV)
             console.log(this.$cookie.get("token"));
-            this.axios.get("http://176.99.173.63:8080/users/me", {headers : {'Authorization' : 'Bearer ' + this.$cookie.get("token")}})
+            this.axios.get(`http://${process.env.VUE_APP_BACKEND}/users/me`, {headers : {'Authorization' : 'Bearer ' + this.$cookie.get("token")}})
                 .then((response) => {
                 if (response.status === 200) {
                     this.stage = 3;

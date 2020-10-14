@@ -75,7 +75,7 @@
                         return String.fromCharCode('0x' + p1);
                     }));
                 console.log(this.$cookie.get("token"));
-                this.axios.post("http://176.99.173.63:8080/users/login", {}, {
+                this.axios.post(`http://${process.env.VUE_APP_BACKEND}/users/login`, {}, {
                     headers:
                         {'Authorization': basicAuth}
                 }).then((response) => {

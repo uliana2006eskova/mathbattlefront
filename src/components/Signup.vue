@@ -187,7 +187,7 @@
                     this.openDangerNotification("top-left", "Не подходящая почта", "Введеная Вами почта не валидна", "danger")
                 }
 
-                this.axios.post("http://api.math.silaeder.ru/users/signup", this.qs.stringify({
+                this.axios.post(`http://${process.env.VUE_APP_BACKEND}/users/signup`, this.qs.stringify({
                     name: this.name.split(' ')[0],
                     surname: this.name.split(' ')[1],
                     username: this.email,
