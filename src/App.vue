@@ -5,9 +5,8 @@
         </Login>
         <SignUp v-if="stage === 2" :view.sync="stage"></SignUp>
         <div id="main" v-if="stage === 3">
-            <SideBar :view.sync="stage"></SideBar>
             <Header></Header>
-            <ChatSelect></ChatSelect>
+            <Messages></Messages>
         </div>
 
     </div>
@@ -16,10 +15,8 @@
 <script>
     import Login from "./components/Login";
     import SignUp from "./components/Signup";
-    import SideBar from "./components/SideBar";
     import Header from "./components/Header";
-    import ChatSelect from "./components/ChatSelect";
-
+    import Messages from "./components/Messages"
     export default {
         name: 'App',
         data: () => ({
@@ -44,42 +41,21 @@
             })
         },
         components: {
-            SideBar,
-            SignUp,
+          SignUp,
             Login,
             Header,
-            ChatSelect,
+          Messages,
         }
     }
 </script>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap');
 
-    @font-face {
-        font-family: 'Proxima Nova';
-        src: url('./assets/fonts/ProximaNova-Bold.eot');
-        src: local('Proxima Nova Bold'), local('ProximaNova-Bold'),
-        url('./assets/fonts/ProximaNova-Bold.eot?#iefix') format('embedded-opentype'),
-        url('./assets/fonts/ProximaNova-Bold.woff') format('woff'),
-        url('./assets/fonts/ProximaNova-Bold.ttf') format('truetype');
-        font-weight: bold;
-        font-style: normal;
-    }
-
-    @font-face {
-        font-family: 'Proxima Nova';
-        src: url('./assets/fonts/ProximaNova-Regular.eot');
-        src: local('Proxima Nova Regular'), local('ProximaNova-Regular'),
-        url('./assets/fonts/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
-        url('./assets/fonts/ProximaNova-Regular.woff') format('woff'),
-        url('./assets/fonts/ProximaNova-Regular.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-    }
 
     #app {
-        font-family: "Proxima Nova";
+        font-family: 'Montserrat Alternates', sans-serif;
         margin: 0;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -96,7 +72,12 @@
     }
 
     body {
-        font-family: "Proxima Nova";
+        font-family: 'Roboto';
         margin: 0;
+    }
+
+    .messages {
+      position: fixed;
+      top: 70px;
     }
 </style>

@@ -1,0 +1,87 @@
+<template>
+  <div class="messages">
+    <div class="head">
+      <vs-input  style="width: 350px;margin-right: auto" placeholder="Поиск" block></vs-input>
+      <svg style="margin-top: 2px" width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>ic_Refresh</title>
+        <g id="💌-Messaging-Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Square_Inbox_Message" transform="translate(-493.000000, -99.000000)" fill="#92929D">
+            <g id="Inbox-List-Style-2" transform="translate(0.000000, 70.000000)">
+              <g id="Path" transform="translate(492.000000, 27.000000)">
+                <path d="M3.76776123,6.32042044 C6.52668891,2.31084121 11.8767736,0.813879043 16.3837115,3.01205954 C21.3476139,5.43311653 23.4089975,11.419809 20.9879405,16.3837115 C18.5668835,21.3476139 12.580191,23.4089975 7.61628853,20.9879405 C5.62035279,20.0144576 4.03993747,18.4347728 3.06453421,16.4907618 C2.81685498,15.9971289 3.01623984,15.3961767 3.50987274,15.1484975 C4.00350565,14.9008182 4.60445787,15.1002031 4.85213709,15.593836 C5.63254766,17.1492201 6.89471047,18.4107994 8.49303083,19.1903524 C12.4641528,21.127198 17.2535068,19.4780911 19.1903524,15.5069692 C21.127198,11.5358472 19.4780911,6.74649322 15.5069692,4.80964763 C11.7006174,2.95316583 7.14252529,4.3912326 5.06520939,8.01080322 L6.76776123,8.01080322 C7.32004598,8.01080322 7.76776123,8.45851847 7.76776123,9.01080322 C7.76776123,9.56308797 7.32004598,10.0108032 6.76776123,10.0108032 L2.76776123,10.0108032 C2.21547648,10.0108032 1.76776123,9.56308797 1.76776123,9.01080322 L1.76776123,5.01080322 C1.76776123,4.45851847 2.21547648,4.01080322 2.76776123,4.01080322 C3.32004598,4.01080322 3.76776123,4.45851847 3.76776123,5.01080322 L3.76776123,6.32042044 L3.76776123,6.32042044 Z"></path>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <Message v-bind:isActive="true" sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+    <Message v-bind:isRead="true" sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+
+    <Message sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+
+    <Message sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+
+    <Message v-bind:isRead="true" sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+    <Message v-bind:isRead="true" sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+
+    <Message sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+
+    <Message sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+
+    <Message v-bind:isRead="true" sender='Бот "Решения"' theme='Менаджер решений' time="12:48PM" text='"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…”'>
+
+    </Message>
+    
+  </div>
+</template>
+
+<script>
+import Message from "./Message.vue";
+export default {
+  name: "Messages",
+  components: {
+    Message
+  }
+}
+</script>
+
+<style scoped>
+  .messages {
+    width: 540px;
+    height: calc(100vh - 70px);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #F1F1F5;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
+  }
+  .head {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #F1F1F5;
+    display: flex;
+    align-content: center;
+  }
+</style>

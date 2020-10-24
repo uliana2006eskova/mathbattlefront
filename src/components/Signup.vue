@@ -194,8 +194,8 @@
                     password: this.password,
                 }), {}).then((response) => {
                     if (response.status === 200) {
-                        this.$emit("update:view", 3);
-                        this.$cookie.set("token", response.data.token, 1);
+                      this.$cookie.set("token", response.data.token, 1);
+                      this.$emit("update:view", 3);
                     }
                 })
                     .catch((error) => {
